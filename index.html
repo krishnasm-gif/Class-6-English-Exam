@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6th Class English Online Examination - Unit 3</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            background-attachment: fixed;
+        }
+        .telugu-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-900 flex flex-col justify-between p-3 sm:p-6 selection:bg-pink-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-xl shadow-2xl rounded-3xl p-5 text-center sticky top-4 z-50 border-2 border-purple-300 max-w-2xl mx-auto w-full flex justify-between items-center px-6">
+        <div>
+            <h1 class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent text-left">Class VI English Exam</h1>
+            <p class="text-xs font-bold text-purple-700 uppercase tracking-wider text-left">Unit 3: "What Can a Dollar..."</p>
+        </div>
+        <!-- In-between Question Send / Submit Option -->
+        <button onclick="confirmEarlySubmit()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-md transition flex items-center gap-1.5 cursor-pointer">
+            <span>📤 Send Exam Now</span>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-2 py-6 max-w-2xl flex-grow w-full">
+
+        <!-- Registration Screen -->
+        <section id="registration-screen" class="bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 border-2 border-purple-200">
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto text-white text-3xl shadow-lg shadow-purple-500/40 mb-3 animate-pulse">🌟</div>
+                <h2 class="text-2xl font-black text-purple-900">Student Registration Portal</h2>
+                <p class="text-sm text-gray-600">Enter your details below to start the assessment. Multiple students can take the exam anytime!</p>
+            </div>
+
+            <form id="reg-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-wider text-purple-800 mb-1.5">Beginning Class & Full Name:</label>
+                    <input type="text" id="student-name" required placeholder="e.g., Class 6 - Rahul Sharma" class="w-full px-4 py-3.5 bg-purple-50/50 border-2 border-purple-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:outline-none transition font-semibold">
+                </div>
+                <div>
+                    <label class="block text-xs font-black uppercase tracking-wider text-purple-800 mb-1.5">Roll Number:</label>
+                    <input type="text" id="student-roll" required placeholder="e.g., 24" class="w-full px-4 py-3.5 bg-purple-50/50 border-2 border-purple-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:outline-none transition font-semibold">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:opacity-95 text-white font-black py-4 rounded-2xl shadow-xl shadow-purple-600/35 transition-all duration-200 text-base uppercase tracking-wider cursor-pointer border border-white/30">
+                    Start Assessment Now 🚀
+                </button>
+            </form>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="hidden bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 border-2 border-purple-200">
+            <div class="flex justify-between items-center border-b border-purple-200 pb-4">
+                <div>
+                    <span id="question-progress" class="text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-pink-600 bg-clip-text text-transparent">Question 1 of 10</span>
+                    <h3 id="question-title" class="text-lg font-black text-gray-900 mt-0.5">Question Title</h3>
+                </div>
+                <div id="timer-box" class="flex items-center space-x-1.5 bg-amber-500 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-amber-500/30">
+                    <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span><span id="time-remaining">180</span>s</span>
+                </div>
+            </div>
+
+            <!-- Question Content -->
+            <div class="space-y-4">
+                <p id="question-text" class="text-base sm:text-lg font-bold text-gray-900 leading-snug"></p>
+                <div class="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 border-2 border-purple-200 p-4 rounded-2xl shadow-inner">
+                    <p class="text-xs font-extrabold text-purple-800 mb-1 flex items-center gap-1.5 uppercase tracking-wide">✨ తెలుగు అనువాదం (Telugu Translation):</p>
+                    <p id="question-telugu" class="telugu-text font-semibold"></p>
+                </div>
+            </div>
+
+            <!-- Options Container -->
+            <div id="options-container" class="space-y-3">
+                <!-- Dynamically injected options -->
+            </div>
+
+            <div class="flex justify-between pt-4 border-t border-purple-200">
+                <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-3 bg-purple-100 border-2 border-purple-200 rounded-2xl text-sm font-black text-purple-700 hover:bg-purple-200 disabled:opacity-30 disabled:cursor-not-allowed transition">Previous</button>
+                <button id="next-btn" onclick="nextQuestion()" class="px-7 py-3 bg-gradient-to-r from-blue-600 to-pink-600 hover:opacity-90 text-white rounded-2xl text-sm font-black shadow-lg shadow-pink-600/30 transition uppercase tracking-wider">Next Question ➔</button>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="hidden bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 text-center border-2 border-purple-200">
+            <div class="space-y-2">
+                <div class="w-20 h-20 bg-gradient-to-tr from-emerald-400 to-teal-600 text-white rounded-3xl flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/40 mb-3 animate-bounce">🏆</div>
+                <h2 class="text-2xl sm:text-3xl font-black bg-gradient-to-r from-emerald-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">Exam Submitted Successfully!</h2>
+                <p id="dispatch-status-msg" class="text-xs sm:text-sm text-gray-600">Sending results to <strong>balaswamysm@gmail.com</strong> & WhatsApp <strong>6360572067</strong>...</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl p-5 space-y-4 text-left shadow-md">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-xs font-black text-purple-700 uppercase tracking-wider">Student Name</p>
+                        <p id="res-name" class="font-bold text-gray-900 text-sm mt-0.5">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-purple-700 uppercase tracking-wider">Roll Number</p>
+                        <p id="res-roll" class="font-bold text-gray-900 text-sm mt-0.5">-</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-purple-700 uppercase tracking-wider">Total Score & Questions</p>
+                        <p class="text-xl font-black text-emerald-600"><span id="res-score">-</span> / 20 <span class="text-xs font-semibold text-gray-500">(10 Qns)</span></p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black text-purple-700 uppercase tracking-wider">Percentage</p>
+                        <p class="text-xl font-black text-pink-600"><span id="res-percentage">-</span></p>
+                    </div>
+                </div>
+
+                <div class="border-t border-purple-200 pt-3 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-extrabold text-gray-800">Final College Grade:</span>
+                        <span id="res-grade" class="text-2xl font-black px-5 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-600/40">-</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-white/80 px-4 py-2 rounded-xl border border-purple-100">
+                        <span class="text-xs font-bold text-purple-900">Performance Feedback:</span>
+                        <span id="res-performance" class="text-xs font-black text-indigo-700 uppercase tracking-wide">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-left space-y-2">
+                <h3 class="font-black text-gray-800 text-sm flex items-center gap-2 uppercase tracking-wide">📊 Detailed Answer Review:</h3>
+                <div id="review-container" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                    <!-- Review injected here -->
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="resetForNewStudent()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-white font-black py-3.5 rounded-2xl text-sm uppercase tracking-wider transition shadow-md cursor-pointer">
+                    Register New Student 👤
+                </button>
+                <button onclick="location.reload()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 border-2 border-purple-200 font-black px-5 py-3.5 rounded-2xl text-sm uppercase tracking-wider transition shadow-md cursor-pointer">
+                    Exit 🚪
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-xl border border-purple-200 py-3 text-center text-xs text-purple-900 font-bold rounded-2xl max-w-2xl mx-auto w-full shadow-xl">
+        &copy; 2026 Telangana State Education Board | Automated Email & WhatsApp Dispatch
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        const questions = [
+            {
+                id: 1,
+                title: "Question 1 (Multiple Choice)",
+                question: "Do you think Tess can buy the miracle with her savings? Why?",
+                telugu: "టెస్ తన వద్ద ఉన్న పొదుపుతో అద్భుతాన్ని కొనుగోలు చేయగలదని మీరు అనుకుంటున్నారా? ఎందుకు?",
+                options: [
+                    { text: "No, because miracles cannot be purchased with money in a shop.", isCorrect: true, teluguTrans: "కాదు, ఎందుకంటే అద్భుతాలను దుకాణంలో డబ్బుతో కొనుగోలు చేయడం సాధ్యం కాదు." },
+                    { text: "Yes, because she had enough dollars and cents.", isCorrect: false, teluguTrans: "అవును, ఎందుకంటే ఆమె వద్ద తగినన్ని డాలర్లు మరియు సెంట్లు ఉన్నాయి." },
+                    { text: "Yes, because the chemist sold her a medicine named miracle.", isCorrect: false, teluguTrans: "అవును, ఎందుకంటే కెమిస్ట్ ఆమెకు అద్భుతం అనే పేరుతో మందు ఇచ్చాడు." },
+                    { text: "No, because the chemist had many miracles in stock.", isCorrect: false, teluguTrans: "కాదు, ఎందుకంటే కెమిస్ట్ వద్ద చాలా అద్భుతాలు నిల్వ ఉన్నాయి." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Question 2 (Multiple Choice)",
+                question: "Why did the mother say that the surgery was a real miracle?",
+                telugu: "శస్త్రచికిత్స నిజమైన అద్భుతమని తల్లి ఎందుకు చెప్పింది?",
+                options: [
+                    { text: "Because Andrew recovered successfully without expensive medical bills.", isCorrect: false, teluguTrans: "ఎందుకంటే ఆండ్రూ ఖరీదైన వైద్య బిల్లులు లేకుండా విజయవంతంగా కోలుకున్నాడు." },
+                    { text: "Because Dr. Armstrong operated for free and saved Andrew against all odds.", isCorrect: true, teluguTrans: "ఎందుకంటే డాక్టర్ ఆర్మ్‌స్ట్రాంగ్ ఉచితంగా ఆపరేషన్ చేసి అన్ని ఇబ్బందులను ఎదుర్కొని ఆండ్రూను రక్షించారు." },
+                    { text: "Because Tess found a magic potion at the medical store.", isCorrect: false, teluguTrans: "ఎందుకంటే టెస్ మెడికల్ స్టోర్లో మాయా మందును కనుగొంది." },
+                    { text: "Because the family won a lottery to pay for the doctor.", isCorrect: false, teluguTrans: "ఎందుకంటే కుటుంబానికి డాక్టరుకు చెల్లించడానికి లాటరీ తగిలింది." }
+                ]
+            },
+            {
+                id: 3,
+                title: "Question 3 (Multiple Choice)",
+                question: "What did the little girl understand by the word 'miracle'?",
+                telugu: "'అద్భుతం' (miracle) అనే పదం ద్వారా చిన్నారి ఏమి అర్థం చేసుకుంది?",
+                options: [
+                    { text: "A complex surgical procedure performed in big hospitals.", isCorrect: false, teluguTrans: "పెద్ద ఆసుపత్రులలో నిర్వహించే సంక్లిష్టమైన శస్త్రచికిత్స ప్రక్రియ." },
+                    { text: "A costly medicine available exclusively at advanced pharmacies.", isCorrect: false, teluguTrans: "అధునాతన ఫార్మసీలలో మాత్రమే లభించే ఖరీదైన ఔషధం." },
+                    { text: "A magical item that could cure her brother's severe illness instantly.", isCorrect: true, teluguTrans: "తన అన్నయ్య తీవ్ర అనారోగ్యాన్ని వెంటనే నయం చేయగల ఒక అద్భుమైన వస్తువు." },
+                    { text: "An unexpected financial loan granted by a kind doctor.", isCorrect: false, teluguTrans: "ఒక దయగల డాక్టర్ మంజూరు చేసిన ఊహించని ఆర్థిక రుణం." }
+                ]
+            },
+            {
+                id: 4,
+                title: "Question 4 (Multiple Choice)",
+                question: "What kind of a man was Dr. Armstrong?",
+                telugu: "డాక్టర్ ఆర్మ్‌స్ట్రాంగ్ ఎలాంటి మనిషి?",
+                options: [
+                    { text: "A compassionate, generous, and renowned neurosurgeon who helped the needy.", isCorrect: true, teluguTrans: "కనికరము గల, ఉదారస్వభావం కలిగిన మరియు నిరుపేదలకు సహాయపడిన ప్రఖ్యాత నూరోసర్జన్." },
+                    { text: "A greedy chemist who sold medicines at very high prices.", isCorrect: false, teluguTrans: "చాలా ఎక్కువ ధరలకు మందులు అమ్మే అత్యాశ గల కెమిస్ట్." },
+                    { text: "A strict school headmaster who valued discipline above everything.", isCorrect: false, teluguTrans: "క్రమశిక్షణను అత్యంత విలువైనదిగా భావించే కఠినమైన పాఠశాల ప్రధానోపాధ్యాయుడు." },
+                    { text: "A careless doctor who ignored poor patients completely.", isCorrect: false, teluguTrans: "పేద రోగులను పూర్తిగా విస్మరించిన నిర్లక్ష్యపు డాక్టర్." }
+                ]
+            },
+            {
+                id: 5,
+                title: "Question 5 (Multiple Choice)",
+                question: "Why did the doctor say that one dollar and eleven cents was the exact price of the miracle?",
+                telugu: "ఒక డాలర్ పదకొండు సెంట్లు అద్భుతానికి ఖచ్చితమైన ధర అని డాక్టర్ ఎందుకు చెప్పారు?",
+                options: [
+                    { text: "Because neurosurgeries cost exactly one dollar and eleven cents.", isCorrect: false, teluguTrans: "ఎందుకంటే నూరోసర్జరీల ఖర్చు ఖచ్చితంగా ఒక డాలర్ పదకొండు సెంట్లు." },
+                    { text: "Because it represented Tess's profound love, savings, and determination to save her brother.", isCorrect: true, teluguTrans: "ఎందుకంటే ఇది టెస్ యొక్క అపారమైన ప్రేమ, పొదుపు మరియు తన అన్నయ్యను రక్షించాలనే సంకల్పాన్ని సూచిస్తుంది." },
+                    { text: "Because the chemist set that price for medical supplies.", isCorrect: false, teluguTrans: "ఎందుకంటే వైద్య సామాగ్రి కోసం కెమిస్ట్ ఆ ధరను నిర్ణయించాడు." },
+                    { text: "Because the government subsidized the entire operation cost.", isCorrect: false, teluguTrans: "ఎందుకంటే ప్రభుత్వం మొత్తం ఆపరేషన్ ఖర్చును సబ్సిడీ ఇచ్చింది." }
+                ]
+            },
+            {
+                id: 6,
+                title: "Question 6 (True/False)",
+                question: "True or False: Andrew's parents had plenty of money for his medical treatment.",
+                telugu: "సత్యమా లేదా అసత్యమా: ఆండ్రూ వైద్య చికిత్స కోసం అతని తల్లిదండ్రుల వద్ద విపరీతంగా డబ్బు ఉంది.",
+                options: [
+                    { text: "False", isCorrect: true, teluguTrans: "అసత్యం (False)" },
+                    { text: "True", isCorrect: false, teluguTrans: "సత్యం (True)" },
+                    { text: "Cannot say", isCorrect: false, teluguTrans: "చెప్పలేము" },
+                    { text: "Not mentioned", isCorrect: false, teluguTrans: "ప్రస్తావించబడలేదు" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Question 7 (True/False)",
+                question: "True or False: Tess went to the medical store holding a jar of coins tightly.",
+                telugu: "సత్యమా లేదా అసత్యమా: టెస్ నాణేల జాడీని గట్టిగా పట్టుకుని మెడికల్ స్టోర్‌కు వెళ్ళింది.",
+                options: [
+                    { text: "True", isCorrect: true, teluguTrans: "సత్యం (True)" },
+                    { text: "False", isCorrect: false, teluguTrans: "అసత్యం (False)" },
+                    { text: "Uncertain", isCorrect: false, teluguTrans: "అనిశ్చితం" },
+                    { text: "Partially true", isCorrect: false, teluguTrans: "పాక్షికంగా సత్యం" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Question 8 (True/False)",
+                question: "True or False: Dr. Carlton Armstrong charged a huge fee to perform Andrew's surgery.",
+                telugu: "సత్యమా లేదా అసత్యమా: డాక్టర్ కార్టన్ ఆర్మ్‌స్ట్రాంగ్ ఆండ్రూ శస్త్రచికిత్స కోసం భారీ ఫీజు వసూలు చేశారు.",
+                options: [
+                    { text: "False", isCorrect: true, teluguTrans: "అసత్యం (False)" },
+                    { text: "True", isCorrect: false, teluguTrans: "సత్యం (True)" },
+                    { text: "Partially true", isCorrect: false, teluguTrans: "పాక్షికంగా నిజం" },
+                    { text: "None of the above", isCorrect: false, teluguTrans: "పైవేవీ కావు" }
+                ]
+            },
+            {
+                id: 9,
+                title: "Question 9 (True/False)",
+                question: "True or False: Tess's love and savings combined to create a real miracle for her brother.",
+                telugu: "సత్యమా లేదా అసత్యమా: టెస్ ప్రేమ మరియు పొదుపు కలగలిసి ఆమె అన్నయ్యకు నిజమైన అద్భుతాన్ని సృష్టించాయి.",
+                options: [
+                    { text: "True", isCorrect: true, teluguTrans: "సత్యం (True)" },
+                    { text: "False", isCorrect: false, teluguTrans: "అసత్యం (False)" },
+                    { text: "Cannot determine", isCorrect: false, teluguTrans: "నిర్ధారించలేము" },
+                    { text: "False statement", isCorrect: false, teluguTrans: "తప్పుడు ప్రకటన" }
+                ]
+            },
+            {
+                id: 10,
+                title: "Question 10 (True/False)",
+                question: "True or False: The chemist immediately understood what kind of miracle Tess wanted to buy.",
+                telugu: "సత్యమా లేదా అసత్యమా: టెస్ ఏ రకమైన అద్భుతాన్ని కొనుగోలు చేయాలనుకుంటుందో కెమిస్ట్ వెంటనే అర్థం చేసుకున్నాడు.",
+                options: [
+                    { text: "False", isCorrect: true, teluguTrans: "అసత్యం (False)" },
+                    { text: "True", isCorrect: false, teluguTrans: "సత్యం (True)" },
+                    { text: "Undecided", isCorrect: false, teluguTrans: "తేల్చబడలేదు" },
+                    { text: "Partially correct", isCorrect: false, teluguTrans: "పాక్షికంగా సరైనది" }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = {};
+        let timeLeft = 180;
+        let timerInterval = null;
+        let studentData = {};
+        let audioCtx = null;
+
+        document.getElementById('reg-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const roll = document.getElementById('student-roll').value.trim();
+            
+            if(!name || !roll) return;
+
+            studentData = { name, roll };
+            currentQuestion = 0;
+            userAnswers = {};
+
+            document.getElementById('registration-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            loadQuestion();
+        });
+
+        function playWarningBeep() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = 880;
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.2);
+            } catch(e) {
+                console.log("Audio alert active");
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 180;
+            document.getElementById('time-remaining').innerText = timeLeft;
+            const timerBox = document.getElementById('timer-box');
+            timerBox.className = "flex items-center space-x-1.5 bg-amber-500 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-amber-500/30";
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time-remaining').innerText = timeLeft;
+
+                if (timeLeft <= 20) {
+                    timerBox.className = "flex items-center space-x-1.5 bg-red-600 text-white px-4 py-2 rounded-2xl text-xs font-black shadow-lg shadow-red-600/50 animate-bounce";
+                    playWarningBeep();
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            startTimer();
+            const q = questions[currentQuestion];
+            document.getElementById('question-progress').innerText = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question-title').innerText = q.title;
+            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('question-telugu').innerText = q.telugu;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentQuestion] === idx;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `w-full text-left p-4 rounded-2xl border-2 transition-all duration-200 flex flex-col space-y-1.5 cursor-pointer ${isSelected ? 'border-pink-500 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 shadow-lg shadow-pink-500/20 ring-2 ring-pink-500/40' : 'border-purple-200 bg-white hover:bg-purple-50/50 hover:border-purple-300'}`;
+                btn.onclick = () => selectOption(idx);
+                
+                btn.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-gray-900">${opt.text}</span>
+                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 ml-2 ${isSelected ? 'border-pink-600 bg-pink-600 text-white shadow-md' : 'border-purple-300 bg-purple-50'}">
+                            ${isSelected ? '<div class="w-2.5 h-2.5 bg-white rounded-full"></div>' : ''}
+                        </div>
+                    </div>
+                    <span class="text-xs text-purple-700 font-bold italic">${opt.teluguTrans}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').innerText = currentQuestion === questions.length - 1 ? 'Submit Exam ✨' : 'Next Question ➔';
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            loadQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            clearInterval(timerInterval);
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                submitExam();
+            }
+        }
+
+        function confirmEarlySubmit() {
+            if(confirm("Are you sure you want to send your exam now?")) {
+                clearInterval(timerInterval);
+                submitExam();
+            }
+        }
+
+        function getGradeDetails(percentage) {
+            if (percentage >= 95) return { grade: 'A+', word: 'Outstanding (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 90) return { grade: 'A', word: 'Excellent (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 85) return { grade: 'A-', word: 'Very Good (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 80) return { grade: 'B+', word: 'Good (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 75) return { grade: 'B', word: 'Above Average (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 70) return { grade: 'B-', word: 'Average (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 65) return { grade: 'C+', word: 'Satisfactory (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 60) return { grade: 'C', word: 'Fair (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 50) return { grade: 'C-', word: 'Passable (' + percentage.toFixed(1) + '%)' };
+            if (percentage >= 35) return { grade: 'D', word: 'Low Pass (' + percentage.toFixed(1) + '%)' };
+            return { grade: 'F', word: 'Fail (' + percentage.toFixed(1) + '%)' };
+        }
+
+        function submitExam() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            let score = 0;
+            let reviewHTML = '';
+
+            questions.forEach((q, qIdx) => {
+                const userChoice = userAnswers[qIdx];
+                const correctOpt = q.options.find(o => o.isCorrect);
+                const userOpt = userChoice !== undefined ? q.options[userChoice] : null;
+                const isCorrect = userOpt ? userOpt.isCorrect : false;
+
+                if (isCorrect) score += 2;
+
+                reviewHTML += `
+                    <div class="p-4 rounded-2xl border-2 text-xs space-y-1.5 shadow-md ${isCorrect ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-rose-50 border-rose-300 text-rose-900'}">
+                        <p class="font-extrabold text-gray-900">Q${qIdx + 1}: ${q.question}</p>
+                        <p><strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">Your Answer:</strong> ${userOpt ? userOpt.text : 'Not Attempted'}</p>
+                        ${!isCorrect ? `<p><strong class="text-emerald-700">Correct Answer:</strong> ${correctOpt.text}</p>` : ''}
+                    </div>
+                `;
+            });
+
+            const percentage = (score / 20) * 100;
+            const gradeInfo = getGradeDetails(percentage);
+
+            document.getElementById('res-name').innerText = studentData.name;
+            document.getElementById('res-roll').innerText = studentData.roll;
+            document.getElementById('res-score').innerText = score;
+            document.getElementById('res-percentage').innerText = percentage.toFixed(1) + '%';
+            document.getElementById('res-grade').innerText = gradeInfo.grade;
+            document.getElementById('res-performance').innerText = gradeInfo.word;
+            document.getElementById('review-container').innerHTML = reviewHTML;
+
+            // Dispatch to Email & WhatsApp immediately
+            dispatchResultsAutomatically(studentData, score, percentage, gradeInfo);
+        }
+
+        function dispatchResultsAutomatically(student, score, percentage, gradeInfo) {
+            const recipientEmail = "balaswamysm@gmail.com";
+            const whatsappNumber = "916360572067"; // Country code +91 for India
+            const reportText = 
+                `📌 *EXAM RESULTS REPORT* 📌\n\n` +
+                `👤 *Student Name:* ${student.name}\n` +
+                `🔢 *Roll Number:* ${student.roll}\n` +
+                `🏆 *Total Score:* ${score} / 20 (10 Questions)\n` +
+                `📈 *Percentage:* ${percentage.toFixed(1)}%\n` +
+                `🎖️ *Grade:* ${gradeInfo.grade} (${gradeInfo.word})\n` +
+                `📚 *Assessment:* Class 6 English Unit 3`;
+
+            const statusMsg = document.getElementById('dispatch-status-msg');
+
+            // 1. Send Email via your Formspree endpoint
+            fetch(`https://formspree.io/f/xkjgkojg`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: recipientEmail,
+                    subject: `Exam Results: ${student.name} (Roll: ${student.roll})`,
+                    message: reportText
+                })
+            }).then(() => {
+                statusMsg.innerHTML = `✅ Results dispatched to Email & WhatsApp successfully!`;
+            }).catch(() => {
+                statusMsg.innerHTML = `✅ Results generated successfully!`;
+            });
+
+            // 2. Open WhatsApp API link automatically for instant notification
+            const whatsappURL = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(reportText)}`;
+            
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 1000);
+        }
+
+        function resetForNewStudent() {
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('registration-screen').classList.remove('hidden');
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-roll').value = '';
+            userAnswers = {};
+        }
+    </script>
+</body>
+</html>
